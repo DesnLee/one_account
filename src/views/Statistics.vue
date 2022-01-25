@@ -1,10 +1,14 @@
 <template>
-  <div>统计页</div>
+  <div>统计页
+    <Nav/>
+  </div>
 </template>
 
 <script lang = "ts">
+  import Nav from '@/components/Nav.vue';
   export default {
-    name: 'Statistics'
+    name: 'Statistics',
+    components: {Nav}
   };
 </script>
 

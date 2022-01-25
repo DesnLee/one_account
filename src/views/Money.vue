@@ -1,13 +1,18 @@
 <template>
-  <div>记账页</div>
+  <div>记账页
+    <Nav/>
+  </div>
 </template>
 
 <script lang = "ts">
-export default {
-  name: 'money'
-};
+  import Nav from '@/components/Nav.vue';
+
+  export default {
+    name: 'money',
+    components: {Nav}
+  };
 </script>
 
-<style scoped lang = "scss">
+<style lang = "scss" scoped>
 
 </style>

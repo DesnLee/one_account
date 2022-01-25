@@ -4,10 +4,13 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import NavBar from '@/components/NavBar.vue';
+import Layout from '@/components/Layout.vue';
 
 Vue.config.productionTip = false;
 
 Vue.component('Navbar', NavBar);
+Vue.component('Layout', Layout);
+
 
 new Vue({
   router,

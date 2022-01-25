@@ -1,7 +1,7 @@
 <template>
-  <div>统计页
-    <Navbar/>
-  </div>
+  <Layout>
+    <p>统计页</p>
+  </Layout>
 </template>
 
 <script lang = "ts">

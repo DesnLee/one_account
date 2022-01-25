@@ -1,14 +1,19 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+  <div>
     <router-view/>
+    <hr/>
+    <div>
+      <router-link to="/money">记账</router-link>
+      ｜
+      <router-link to = "/labels">标签</router-link>
+      ｜
+      <router-link to = "/statistics">统计</router-link>
+    </div>
   </div>
 </template>
 
 <style lang="scss">
+@import "~@/assets/styles/color.scss";
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,10 +27,10 @@
 
   a {
     font-weight: bold;
-    color: #2c3e50;
+    color: $orange;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: $orange;
     }
   }
 }

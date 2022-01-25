@@ -3,9 +3,9 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
-// import Nav from '@/components/Nav.vue';
+import NavBar from '@/components/NavBar.vue';
 Vue.config.productionTip = false;
-Vue.component('Nav', He);
+Vue.component('Navbar', NavBar);
 new Vue({
     router,
     store,

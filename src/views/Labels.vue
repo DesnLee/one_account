@@ -1,14 +1,12 @@
 <template>
   <div>标签页
-    <Nav/>
+    <Navbar/>
   </div>
 </template>
 
 <script lang = "ts">
-  import Nav from '@/components/Nav.vue';
   export default {
     name: 'Labels',
-    components: {Nav}
   };
 </script>
 

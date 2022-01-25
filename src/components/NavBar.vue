@@ -9,11 +9,15 @@
 </template>
 
 <script lang = "ts">
+  // import {Component} from 'vue-property-decorator';
+
+  @Component
+
   export default {
-    name: 'nav'
+    name: 'navbar'
   };
 </script>
 
-<style scoped lang = "scss">
+<style lang = "scss" scoped>
 
 </style>

@@ -1,15 +1,12 @@
 <template>
   <div>记账页
-    <Nav/>
+    <Navbar/>
   </div>
 </template>
 
 <script lang = "ts">
-  import Nav from '@/components/Nav.vue';
-
   export default {
     name: 'money',
-    components: {Nav}
   };
 </script>
 

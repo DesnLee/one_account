@@ -4,9 +4,25 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #FFFFFF;
+}
+
 a {
   text-decoration: none;
   color: inherit;
   outline: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+:focus {
+  outline: none;
 }

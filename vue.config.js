@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/no-var-requires: "off" */
 const path = require('path')
 
-exports = {
+module.exports = {
   // // 基本路径 baseURL已经过时
   // publicPath : './',
 
@@ -26,7 +26,7 @@ exports = {
           .include.add(dir).end() //只包含 icons
           .use('svg-sprite-loader').loader('svg-sprite-loader').options({extract : false}).end()
     config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite : true}])
-    config.module.rule('svg').exclude.add(dir) // 其他svg loader排除 icons 目录
+    config.module.rule('svg').exclude.add(dir) // 其他svg loader 排除 icons 目录
   },
 
   // configureWebpack : () => {},

@@ -6,3 +6,14 @@ $color-main: #303133;
 $color-second: #606266;
 $color-third: #909399;
 $color-grey: #C0C4CC;
+
+
+//placehold
+%innerShadow {
+  box-shadow: inset 0 -16px 12px -12px fade-out($color-main, .92),
+  inset 0 16px 12px -12px fade-out($color-main, .92);
+}
+
+%outerShadow {
+  box-shadow: 0 0 16px rgba(0, 0, 0, .12);
+}

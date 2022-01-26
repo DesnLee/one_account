@@ -13,7 +13,7 @@
     </section>
     <section>
       <label class = "marks"> <span class = "name">备注</span>
-        <input type = "text" placeholder = "在此添加备注..."/>
+        <input placeholder = "在此添加备注..." type = "text"/>
       </label>
     </section>
     <ul class = "types">
@@ -22,20 +22,22 @@
     </ul>
     <section class = "keyboard">
       <div class = "output">1000</div>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button>0</button>
-      <button>退格</button>
-      <button>清空</button>
-      <button>OK</button>
-      <button>.</button>
+      <div class = "buttons">
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>退格</button>
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>清空</button>
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button class = "ok">OK</button>
+        <button class = "zero">0</button>
+        <button>.</button>
+      </div>
     </section>
   </Layout>
 </template>
@@ -103,4 +105,75 @@
     }
   }
 
+  .types {
+    display: flex;
+    text-align: center;
+    font-size: 20px;
+    background: #DDD;
+
+    li {
+      width: 50%;
+      height: 44px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.selected {
+        position: relative;
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: $color-highlight;
+        }
+
+        color: $color-highlight;
+      }
+    }
+  }
+
+  .keyboard {
+    .output {
+      @extend %innerShadow;
+      font-size: 40px;
+      font-weight: bold;
+      color: $color-highlight;
+      font-family: Consolas, monospace;
+      text-align: right;
+      padding: 0 16px;
+      line-height: 80px;
+      margin-bottom: 8px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(4, 64px);
+      grid-gap: 8px;
+      gap: 8px;
+      padding: 0 8px;
+
+      > button {
+        background: #FFF;
+        color: $color-second;
+        font-size: 18px;
+        font-weight: bold;
+        border: 1px solid $color-grey;
+
+        &.ok {
+          grid-column: 4 / 5;
+          grid-row: 3 / 5;
+        }
+
+        &.zero {
+          grid-column: 1 / 3;
+          grid-row: 4 / 5;
+        }
+      }
+    }
+  }
 </style>

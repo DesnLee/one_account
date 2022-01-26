@@ -12,8 +12,8 @@
     font-family: $font-hei;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: $color-main;
     line-height: 1.5;
+    font-size: 14px;
   }
 </style>

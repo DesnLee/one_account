@@ -1,14 +1,14 @@
 <template>
   <nav>
-    <router-link to = "/money" class = "item">
+    <router-link active-class = "selected" class = "item" to = "/money">
       <Icon name = "money"/>
       记账
     </router-link>
-    <router-link to = "/labels" class = "item">
+    <router-link active-class = "selected" class = "item" to = "/labels">
       <Icon name = "labels"/>
       标签
     </router-link>
-    <router-link to = "/statistics" class = "item">
+    <router-link active-class = "selected" class = "item" to = "/statistics">
       <Icon name = "statistics"/>
       统计
     </router-link>
@@ -22,11 +22,12 @@
 </script>
 
 <style lang = "scss" scoped>
+  @import "~@/assets/styles/helper.scss";
   nav {
     display: flex;
     box-shadow: 0 0 3px rgba(0, 0, 0, .24);
     flex-direction: row;
-    background: #F0F0F0;
+    background: #F8F8F8;
 
     & > .item {
       width: 33.333333%;
@@ -42,6 +43,10 @@
         height: 24px;
         margin-bottom: 4px;
       }
+    }
+
+    & > .item.selected {
+      color: $color-highlight;
     }
   }
 </style>

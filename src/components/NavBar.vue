@@ -25,7 +25,7 @@
   @import "~@/assets/styles/helper.scss";
   nav {
     display: flex;
-    box-shadow: 0 0 3px rgba(0, 0, 0, .24);
+    box-shadow: 0 0 16px rgba(0, 0, 0, .12);
     flex-direction: row;
     background: #F8F8F8;
 

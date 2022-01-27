@@ -11,13 +11,9 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
 
-  @Component({
-    props: {
-      propMessage: String
-    }
-  })
+  @Component
   export default class Types extends Vue {
-    type = '-';
+    type: number = '-';
 
     selectType(type: string): void {
       if (type !== '-' && type !== '+') {

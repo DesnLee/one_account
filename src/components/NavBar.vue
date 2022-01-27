@@ -23,6 +23,7 @@
 
 <style lang = "scss" scoped>
   @import "~@/assets/styles/helper.scss";
+
   nav {
     @extend %outerShadow;
     display: flex;

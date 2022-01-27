@@ -1,6 +1,6 @@
 <template>
-  <div class = "layout-wrapper" :class = "classPrefix && `${classPrefix}-wrapper`">
-    <div class = "content" :class = "classPrefix && `${classPrefix}-content`">
+  <div :class = "classPrefix && `${classPrefix}-wrapper`" class = "layout-wrapper">
+    <div :class = "classPrefix && `${classPrefix}-content`" class = "content">
       <slot/>
     </div>
     <Navbar/>
@@ -10,6 +10,7 @@
 
 <script lang = "ts">
   import NavBarBg from '@/components/NavBarBg.vue';
+
   export default {
     components: {NavBarBg},
     props: ['classPrefix'],
@@ -17,7 +18,7 @@
   };
 </script>
 
-<style scoped lang = "scss">
+<style lang = "scss" scoped>
   .layout-wrapper {
     display: flex;
     flex-direction: column;

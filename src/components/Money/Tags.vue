@@ -17,8 +17,8 @@
 
   @Component
   export default class Tags extends Vue {
-    @Prop(Array) readonly dataList: string[] | undefined;
-    @Prop(Array) value: string[];
+    @Prop(Array) readonly dataList!: string[];
+    @Prop(Array) value!: string[];
 
     toggle(tag: string): void {
       const index = this.value.indexOf(tag);

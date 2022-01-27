@@ -12,7 +12,7 @@
 
   @Component
   export default class Marks extends Vue {
-    @Prop(String) value: string;
+    @Prop(String) value!: string;
 
     @Watch('value')
     onUpdateMarks(newValue: string): void {

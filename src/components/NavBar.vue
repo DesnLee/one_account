@@ -28,6 +28,10 @@
     display: flex;
     flex-direction: row;
     background: #F8F8F8;
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    height: $height-navbar;
 
     & > .item {
       width: 33.333333%;

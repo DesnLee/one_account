@@ -4,11 +4,14 @@
       <slot/>
     </div>
     <Navbar/>
+    <NavBarBg/>
   </div>
 </template>
 
 <script lang = "ts">
+  import NavBarBg from '@/components/NavBarBg.vue';
   export default {
+    components: {NavBarBg},
     props: ['classPrefix'],
     name: 'Layout'
   };
@@ -18,11 +21,9 @@
   .layout-wrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
   }
 
   .content {
-    overflow: auto;
-    flex-grow: 1;
+    overflow: hidden;
   }
 </style>

@@ -13,7 +13,7 @@
 
   @Component
   export default class Types extends Vue {
-    type: number = '-';
+    type = '-';
 
     selectType(type: string): void {
       if (type !== '-' && type !== '+') {

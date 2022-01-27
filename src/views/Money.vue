@@ -1,5 +1,5 @@
 <template>
-  <Layout>
+  <Layout class-prefix = "money">
     <section class = "tags">
       <ul class = "current">
         <li>衣</li>
@@ -47,6 +47,14 @@
     name: 'Money',
   };
 </script>
+
+<style lang = "scss">
+  .money-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+</style>
 
 <style lang = "scss" scoped>
   @import "~@/assets/styles/helper.scss";
@@ -155,14 +163,15 @@
       grid-template-rows: repeat(4, 64px);
       grid-gap: 8px;
       gap: 8px;
-      padding: 0 8px;
+      padding: 0 8px 24px 8px;
 
       > button {
-        background: #FFF;
+        background: #F4F4F4;
         color: $color-second;
         font-size: 18px;
         font-weight: bold;
-        border: 1px solid $color-grey;
+        border: none;
+        border-radius: 8px;
 
         &.ok {
           grid-column: 4 / 5;

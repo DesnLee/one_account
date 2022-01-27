@@ -1,8 +1,9 @@
 <template>
   <section class = "tags">
     <ul class = "current">
-      <li v-for = "tag in dataList" :key = "tag" :class = "{selected : selectedTags.indexOf(tag) >= 0}"
-          @click = "toggle(tag)">{{ tag }}</li>
+      <li v-for = "tag in dataList" :key = "tag" :class = "{selected : value.indexOf(tag) >= 0}" @click = "toggle(tag)">
+        {{ tag }}
+      </li>
     </ul>
     <div class = "new">
       <button @click = "create">添加标签</button>
@@ -17,21 +18,17 @@
   @Component
   export default class Tags extends Vue {
     @Prop(Array) readonly dataList: string[] | undefined;
-    selectedTags: string[] = [];
+    @Prop(Array) value: string[];
 
     toggle(tag: string): void {
-      const selected = this.selectedTags;
-      const index = selected.indexOf(tag);
-      index < 0 ? selected.push(tag) : selected.splice(index, 1);
+      const index = this.value.indexOf(tag);
+      index < 0 ? this.value.push(tag) : this.value.splice(index, 1);
+      this.$emit('update:value', this.value);
     }
 
     create(): void {
       const tag = window.prompt('请输入标签名');
-      if (tag === '') {
-        window.alert('标签名不能为空！');
-      } else {
-        this.$emit('update:dataList', [...this.dataList, tag]);
-      }
+      if (tag) { this.$emit('update:dataList', [...this.dataList, tag]); }
     }
   }
 </script>

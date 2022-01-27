@@ -8,11 +8,17 @@
 
 <script lang = "ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
 
   @Component
   export default class Marks extends Vue {
-    value = '';
+    @Prop(String) value: string;
+
+    @Watch('value')
+    onUpdateMarks(newValue: string): void {
+      this.$emit('update:value', newValue);
+    }
+
   }
 </script>
 

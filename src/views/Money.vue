@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags/>
+    <Tags :data-list = "tags"/>
     <Marks/>
     <Types/>
     <Keyboards/>
@@ -8,15 +8,19 @@
 </template>
 
 <script lang = "ts">
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
   import Tags from '@/components/Money/Tags.vue';
   import Marks from '@/components/Money/Marks.vue';
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
 
-  export default {
-    name: 'Money',
-    components: {Keyboards, Types, Marks, Tags},
-  };
+  @Component({
+    components: {Keyboards, Types, Marks, Tags}
+  })
+  export default class Money extends Vue {
+    tags = ['衣', '食', '住', '行', '哈哈'];
+  }
 </script>
 
 <style lang = "scss">

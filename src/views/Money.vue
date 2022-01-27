@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags :data-list = "tags"/>
+    <Tags :data-list.sync = "tags"/>
     <Marks/>
     <Types/>
     <Keyboards/>

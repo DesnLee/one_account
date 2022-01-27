@@ -1,15 +1,19 @@
 <template>
   <section>
     <label class = "marks"> <span class = "name">备注</span>
-      <input placeholder = "在此添加备注..." type = "text"/>
+      <input v-model = "value" placeholder = "在此添加备注..." type = "text"/>
     </label>
   </section>
 </template>
 
 <script lang = "ts">
-  export default {
-    name: 'Marks'
-  };
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
+
+  @Component
+  export default class Marks extends Vue {
+    value = '';
+  }
 </script>
 
 <style lang = "scss" scoped>

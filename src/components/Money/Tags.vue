@@ -59,7 +59,7 @@
 
         &.selected {
           color: $color-highlight;
-          background-color: #2E64C924;
+          background-color: $color-highlight-opacity;
         }
       }
     }

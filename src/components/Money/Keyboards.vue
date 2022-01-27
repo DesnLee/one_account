@@ -22,14 +22,20 @@
 
 <script lang = "ts">
   import Vue from 'vue';
-  import {Component} from 'vue-property-decorator';
+  import {Component, Prop} from 'vue-property-decorator';
 
   @Component
   export default class Keyboards extends Vue {
-    output = '0';
+    @Prop(Number) readonly value!: number;
+    output = '';
+
+    created(): void {
+      this.output = String(this.value);
+    }
 
     inputNum(event: MouseEvent): void {
-      const input = event.target.textContent;
+      const target = event.target as HTMLElement;
+      const input = target.textContent as string;
       if (this.output === '0') {
         this.output = '0123456789'.indexOf(input) >= 0 ? input : this.output + input;
       } else {
@@ -51,7 +57,8 @@
     }
 
     ok(): void {
-      console.log('1');
+      this.$emit('update:value', parseFloat(this.output));
+      this.clearAll();
     }
   }
 </script>

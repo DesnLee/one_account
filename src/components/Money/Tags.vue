@@ -18,7 +18,7 @@
   @Component
   export default class Tags extends Vue {
     @Prop(Array) readonly dataList!: string[];
-    @Prop(Array) value!: string[];
+    @Prop(Array) readonly value!: string[];
 
     toggle(tag: string): void {
       const index = this.value.indexOf(tag);
@@ -58,7 +58,7 @@
         background-color: #F4F4F4;
         $h: 36px;
         height: $h;
-        border-radius: $h/2;
+        border-radius: ($h/2);
         padding: 0 16px;
         line-height: 36px;
         text-align: center;

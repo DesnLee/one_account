@@ -1,7 +1,7 @@
 <template>
   <section>
     <label class = "marks"> <span class = "name">备注</span>
-      <input v-model = "value" placeholder = "在此添加备注..." type = "text"/>
+      <input v-model.trim = "input" placeholder = "在此添加备注..." type = "text"/>
     </label>
   </section>
 </template>
@@ -12,13 +12,17 @@
 
   @Component
   export default class Marks extends Vue {
-    @Prop(String) value!: string;
+    @Prop(String) readonly value!: string;
+    input = '';
 
-    @Watch('value')
-    onUpdateMarks(newValue: string): void {
-      this.$emit('update:value', newValue);
+    created(): void {
+      this.input = this.value;
     }
 
+    @Watch('input')
+    onUpdateMarks(): void {
+      this.$emit('update:value', this.input);
+    }
   }
 </script>
 

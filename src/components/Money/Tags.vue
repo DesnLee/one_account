@@ -1,18 +1,8 @@
 <template>
   <section class = "tags">
     <ul class = "current">
-      <li>衣</li>
-      <li class = "selected">食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li class = "selected">食</li>
-      <li>住</li>
-      <li>行</li>
-      <li>衣</li>
-      <li class = "selected">食</li>
-      <li>住</li>
-      <li>行</li>
+      <li v-for = "tag in dataList" :key = "tag" :class = "{selected : selectedTags.indexOf(tag) >= 0}"
+          @click = "toggle(tag)">{{ tag }}</li>
     </ul>
     <div class = "new">
       <button>添加标签</button>
@@ -21,9 +11,20 @@
 </template>
 
 <script lang = "ts">
-  export default {
-    name: 'Tags'
-  };
+  import Vue from 'vue';
+  import {Component, Prop} from 'vue-property-decorator';
+
+  @Component
+  export default class Tags extends Vue {
+    @Prop(Array) dataList: string[] | undefined;
+    selectedTags: string[] = [];
+
+    toggle(tag: string): void {
+      const selected = this.selectedTags;
+      const index = selected.indexOf(tag);
+      index < 0 ? selected.push(tag) : selected.splice(index, 1);
+    }
+  }
 </script>
 
 <style lang = "scss" scoped>

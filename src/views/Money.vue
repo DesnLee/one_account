@@ -1,9 +1,9 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags :data-list.sync = "tags"/>
-    <Marks/>
-    <Types/>
-    <Keyboards/>
+    <Tags :data-list.sync = "tags" :value.sync = "result.tags"/>
+    <Marks :value.sync = "result.marks"/>
+    <Types :value.sync = "result.type"/>
+    <Keyboards :value.sync = "result.count"/>
   </Layout>
 </template>
 
@@ -15,11 +15,24 @@
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
 
+  type Result = {
+    tags: string[]
+    marks: string
+    type: string
+    count: number
+  }
+
   @Component({
     components: {Keyboards, Types, Marks, Tags}
   })
   export default class Money extends Vue {
     tags = ['衣', '食', '住', '行', '哈哈'];
+    result: Result = {
+      tags: [],
+      marks: '',
+      type: '-',
+      count: 0
+    };
   }
 </script>
 

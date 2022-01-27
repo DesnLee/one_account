@@ -26,11 +26,11 @@
 
   @Component
   export default class Keyboards extends Vue {
-    @Prop(Number) readonly value!: number;
+    @Prop() readonly value!: number;
     output = '';
 
     created(): void {
-      this.output = String(this.value);
+      this.output = this.value.toString();
     }
 
     inputNum(event: MouseEvent): void {

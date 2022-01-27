@@ -13,7 +13,6 @@
 
   @Component
   export default class Types extends Vue {
-    name = 'Types';
     type = '-';
 
     selectType(type: string): void {

@@ -1,29 +1,59 @@
 <template>
   <section class = "keyboards">
-    <div class = "output">1000</div>
+    <div class = "output">{{ output }}</div>
     <div class = "buttons">
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
-      <button>退格</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
-      <button>清空</button>
-      <button>7</button>
-      <button>8</button>
-      <button>9</button>
-      <button class = "ok">OK</button>
-      <button class = "zero">0</button>
-      <button>.</button>
+      <button @click = "inputNum">1</button>
+      <button @click = "inputNum">2</button>
+      <button @click = "inputNum">3</button>
+      <button @click = "clearOne">退格</button>
+      <button @click = "inputNum">4</button>
+      <button @click = "inputNum">5</button>
+      <button @click = "inputNum">6</button>
+      <button @click = "clearAll">清空</button>
+      <button @click = "inputNum">7</button>
+      <button @click = "inputNum">8</button>
+      <button @click = "inputNum">9</button>
+      <button class = "ok" @click = "ok">OK</button>
+      <button class = "zero" @click = "inputNum">0</button>
+      <button @click = "inputNum">.</button>
     </div>
   </section>
 </template>
 
 <script lang = "ts">
-  export default {
-    name: 'Keyboards'
-  };
+  import Vue from 'vue';
+  import {Component} from 'vue-property-decorator';
+
+  @Component
+  export default class Keyboards extends Vue {
+    output = '0';
+
+    inputNum(event: MouseEvent): void {
+      const input = event.target.textContent;
+      if (this.output === '0') {
+        this.output = '0123456789'.indexOf(input) >= 0 ? input : this.output + input;
+      } else {
+        if (input === '.' && this.output.indexOf('.') > 0) { return; }
+        this.output += input;
+      }
+    }
+
+    clearOne(): void {
+      if (this.output.length === 1) {
+        this.output = '0';
+        return;
+      }
+      this.output = this.output.slice(0, -1);
+    }
+
+    clearAll(): void {
+      this.output = '0';
+    }
+
+    ok(): void {
+      console.log('1');
+    }
+  }
 </script>
 
 <style lang = "scss" scoped>
@@ -71,6 +101,10 @@
         &.zero {
           grid-column: 1 / 3;
           grid-row: 4 / 5;
+        }
+
+        &:active {
+          background: $color-highlight-opacity;
         }
       }
     }

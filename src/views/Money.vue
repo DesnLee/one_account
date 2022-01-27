@@ -3,7 +3,15 @@
     <section class = "tags">
       <ul class = "current">
         <li>衣</li>
-        <li>食</li>
+        <li class = "selected">食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>衣</li>
+        <li class = "selected">食</li>
+        <li>住</li>
+        <li>行</li>
+        <li>衣</li>
+        <li class = "selected">食</li>
         <li>住</li>
         <li>行</li>
       </ul>
@@ -60,23 +68,42 @@
   @import "~@/assets/styles/helper.scss";
 
   .tags {
+    flex-grow: 1;
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100px;
 
     > .current {
       display: flex;
+      flex-wrap: wrap;
+      margin-right: -10px;
 
       > li {
-        background-color: #F0F0F0;
-        $h: 24px;
+        font: {
+          size: 18px;
+          weight: bold;
+        }
+        color: $color-second;
+        background-color: #F4F4F4;
+        $h: 36px;
         height: $h;
         border-radius: $h/2;
-        padding: 0 12px;
-        line-height: 24px;
+        padding: 0 16px;
+        line-height: 36px;
+        text-align: center;
+        margin: 0 10px 12px 0;
+
+        &.selected {
+          color: $color-highlight;
+          background-color: #2E64C924;
+        }
       }
     }
 
     > .new {
-      padding-top: 16px;
+      padding-top: 32px;
 
       button {
         background: transparent;
@@ -147,10 +174,12 @@
   .keyboard {
     .output {
       @extend %innerShadow;
-      font-size: 40px;
-      font-weight: bold;
+      font: {
+        size: 40px;
+        weight: bold;
+        family: Consolas, monospace;
+      }
       color: $color-highlight;
-      font-family: Consolas, monospace;
       text-align: right;
       padding: 0 16px;
       line-height: 80px;
@@ -159,9 +188,12 @@
 
     .buttons {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(4, 64px);
-      grid-gap: 8px;
+      grid: {
+        template-columns: repeat(4, 1fr);
+        template-rows: repeat(4, 64px);
+        row-gap: 8px;
+        column-gap: 8px;
+      }
       gap: 8px;
       padding: 0 8px 24px 8px;
 

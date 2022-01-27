@@ -5,7 +5,7 @@
           @click = "toggle(tag)">{{ tag }}</li>
     </ul>
     <div class = "new">
-      <button>添加标签</button>
+      <button @click = "create">添加标签</button>
     </div>
   </section>
 </template>
@@ -16,13 +16,22 @@
 
   @Component
   export default class Tags extends Vue {
-    @Prop(Array) dataList: string[] | undefined;
+    @Prop(Array) readonly dataList: string[] | undefined;
     selectedTags: string[] = [];
 
     toggle(tag: string): void {
       const selected = this.selectedTags;
       const index = selected.indexOf(tag);
       index < 0 ? selected.push(tag) : selected.splice(index, 1);
+    }
+
+    create(): void {
+      const tag = window.prompt('请输入标签名');
+      if (tag === '') {
+        window.alert('标签名不能为空！');
+      } else {
+        this.$emit('update:dataList', [...this.dataList, tag]);
+      }
     }
   }
 </script>

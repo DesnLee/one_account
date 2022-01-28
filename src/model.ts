@@ -1,21 +1,24 @@
+const localStorageTagsName = 'savedTags';
+const localStorageAccountName = 'savedAccount';
+
 const deepClone = (data: Account): Account => {
   return JSON.parse(JSON.stringify(data));
 };
 
 const getAccountList = (): Account[] => {
-  return JSON.parse(window.localStorage.getItem('savedAccount') || '[]');
+  return JSON.parse(window.localStorage.getItem(localStorageAccountName) || '[]');
 };
 
 const setAccountList = (arr: Account[]): void => {
-  window.localStorage.setItem('savedAccount', JSON.stringify(arr));
+  window.localStorage.setItem(localStorageAccountName, JSON.stringify(arr));
 };
 
 const getTags = (): string[] => {
-  return JSON.parse(window.localStorage.getItem('savedTags') || '[]');
+  return JSON.parse(window.localStorage.getItem(localStorageTagsName) || '[]');
 };
 
 const setTags = (arr: string[]): void => {
-  window.localStorage.setItem('savedTags', JSON.stringify(arr));
+  window.localStorage.setItem(localStorageTagsName, JSON.stringify(arr));
 };
 
 export {

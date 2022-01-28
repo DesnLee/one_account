@@ -1,38 +1,60 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags :data-list.sync = "tags" :value.sync = "result.tags"/>
-    <Marks :value.sync = "result.marks"/>
-    <Types :value.sync = "result.type"/>
-    <Keyboards :value.sync = "result.count"/>
+    {{ accountList }}
+    <Tags :data-list.sync = "tags" :value.sync = "account.tags"/>
+    <Marks :value.sync = "account.marks"/>
+    <Types :value.sync = "account.type"/>
+    <Keyboards :value.sync = "account.count" @saveAccount = "saveAccount"/>
   </Layout>
 </template>
 
 <script lang = "ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import {Watch} from 'vue-property-decorator';
   import Tags from '@/components/Money/Tags.vue';
   import Marks from '@/components/Money/Marks.vue';
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
 
-  type Result = {
-    tags: string[]
-    marks: string
-    type: string
-    count: number
-  }
-
   @Component({
     components: {Keyboards, Types, Marks, Tags}
   })
   export default class Money extends Vue {
-    tags = ['衣', '食', '住', '行', '哈哈'];
-    result: Result = {
+    tags = JSON.parse(window.localStorage.getItem('savedTags') || '[]');
+    accountList = JSON.parse(window.localStorage.getItem('savedAccount') || '[]');
+    account: Account = {
       tags: [],
       marks: '',
       type: '-',
-      count: 0
+      count: 0,
     };
+
+    created(): void {
+      if (this.tags.length === 0) {
+        this.tags = ['衣', '食', '住', '行'];
+      }
+    }
+
+    @Watch('tags')
+    onTagsChanged(): void {
+      window.localStorage.setItem('savedTags', JSON.stringify(this.tags));
+    }
+
+    saveAccount(): void {
+      // deep clone
+      const newAccount = JSON.parse(JSON.stringify(this.account));
+      newAccount.createAt = new Date();
+
+      this.accountList.push(newAccount);
+      window.localStorage.setItem('savedAccount', JSON.stringify(this.accountList));
+
+      // 重置状态
+      this.account.tags = [];
+      this.account.marks = '';
+    }
+
+
   }
 </script>
 

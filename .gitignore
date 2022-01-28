@@ -1,4 +1,8 @@
 ### Node template
+# idea && macOS
+.DS_Store
+.idea/*
+
 # Logs
 logs
 *.log

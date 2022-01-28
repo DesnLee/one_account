@@ -57,8 +57,11 @@
     }
 
     ok(): void {
-      this.$emit('update:value', parseFloat(this.output));
-      this.clearAll();
+      if (parseFloat(this.output) !== 0) {
+        this.$emit('update:value', parseFloat(this.output));
+        this.$emit('saveAccount');
+        this.clearAll();
+      }
     }
   }
 </script>

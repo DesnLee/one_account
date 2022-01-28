@@ -23,6 +23,11 @@
     onUpdateMarks(): void {
       this.$emit('update:value', this.input);
     }
+
+    @Watch('value')
+    onUpdateValue(): void {
+      this.input = this.value;
+    }
   }
 </script>
 

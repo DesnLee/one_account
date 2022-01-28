@@ -16,7 +16,8 @@ module.exports = {
     'no-debugger' : process.env.NODE_ENV === 'production' ? 'warn' : 'off'
   },
   globals : {
-    '__WebpackModuleApi' : 'writable'
+    '__WebpackModuleApi' : 'writable',
+    'Account' : true
   },
   overrides : [
     {

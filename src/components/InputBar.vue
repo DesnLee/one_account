@@ -1,9 +1,7 @@
 <template>
-  <section>
-    <label class = "marks"> <span class = "name">备注</span>
-      <input v-model.trim = "input" placeholder = "在此添加备注..." type = "text"/>
-    </label>
-  </section>
+  <label class = "marks"> <span class = "name">{{ name }}</span>
+    <input v-model.trim = "input" :placeholder = "placeholder" type = "text"/>
+  </label>
 </template>
 
 <script lang = "ts">
@@ -13,6 +11,9 @@
   @Component
   export default class Marks extends Vue {
     @Prop(String) readonly value!: string;
+    @Prop({required: true}) readonly name: string;
+    @Prop({required: true}) readonly placeholder: string;
+
     input = '';
 
     created(): void {
@@ -35,7 +36,6 @@
   @import "~@/assets/styles/helper.scss";
 
   .marks {
-    background-color: #F5F5F5;
     padding-left: 16px;
     display: flex;
     align-items: center;

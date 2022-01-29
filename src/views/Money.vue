@@ -9,19 +9,23 @@
 
 <script lang = "ts">
   import Vue from 'vue';
-  import {Component, Watch} from 'vue-property-decorator';
+  import {Component} from 'vue-property-decorator';
   import Tags from '@/components/Money/Tags.vue';
   import Marks from '@/components/Money/Marks.vue';
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
-  import {deepClone, getAccountList, setAccountList, getTags, setTags} from '@/model';
+  import accountModel from '@/models/accountModel';
+  import tagsModel from '@/models/tagsModel';
+
+  // 同步 localStorage 账单和标签数据
+  accountModel.getData();
+  tagsModel.getData();
 
   @Component({
     components: {Keyboards, Types, Marks, Tags}
   })
   export default class Money extends Vue {
-    tags = getTags();
-    accountList = getAccountList();
+    tags = tagsModel.data;
     account: Account = {
       tags: [],
       marks: '',
@@ -29,23 +33,9 @@
       count: 0,
     };
 
-    created(): void {
-      if (this.tags.length === 0) {
-        this.tags = ['衣', '食', '住', '行'];
-      }
-    }
-
-    @Watch('tags')
-    onTagsChanged(): void {
-      setTags(this.tags);
-    }
-
     saveAccount(): void {
-      const newAccount = deepClone(this.account);
-      newAccount.createAt = new Date();
-
-      this.accountList.push(newAccount);
-      setAccountList(this.accountList);
+      const result = accountModel.create(this.account);
+      window.alert(result.message);
 
       // 重置状态
       this.account.tags = [];

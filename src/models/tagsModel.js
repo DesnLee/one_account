@@ -23,6 +23,22 @@ const tagsModel = {
         this.data.push({ id, name });
         return this.save();
     },
+    update(id, name) {
+        const tag = this.data.filter(item => item.id === id)[0];
+        const names = this.data.map(item => item.name);
+        if (names.indexOf(name) >= 0) {
+            return { code: 1000, message: '标签已存在' };
+        }
+        else {
+            tag.name = name;
+            return this.save();
+        }
+    },
+    delete(id) {
+        const index = this.data.indexOf(this.data.filter(item => item.id === id)[0]);
+        this.data.splice(index, 1);
+        return this.save();
+    },
     save() {
         try {
             window.localStorage.setItem(localStorageName, JSON.stringify(this.data));

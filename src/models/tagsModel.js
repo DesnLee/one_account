@@ -1,3 +1,4 @@
+import createId from '@/lib/createId';
 const localStorageName = 'savedTags';
 const tagsModel = {
     data: [],
@@ -18,7 +19,8 @@ const tagsModel = {
         if (tagName) {
             return { code: 1000, message: '标签已存在，请勿重复添加' };
         }
-        this.data.push(tagName);
+        const id = createId();
+        this.data.push({ id, name: tagName });
         return this.save();
     },
     save() {

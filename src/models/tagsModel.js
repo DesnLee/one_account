@@ -15,7 +15,7 @@ const tagsModel = {
         if (!name) {
             return { code: 1001, message: '标签不能为空' };
         }
-        const tagName = this.data.map(item => item.name === name)[0];
+        const tagName = this.data.filter(item => item.name === name)[0];
         if (tagName) {
             return { code: 1000, message: '标签已存在，请勿重复添加' };
         }

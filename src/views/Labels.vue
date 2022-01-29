@@ -1,13 +1,13 @@
 <template>
   <Layout>
     <div class = "tags">
-      <router-link class = "tagItem" v-for = "tag in tags" :key = "tag.id" :to = "`/labels/${tag.id}`">
+      <router-link v-for = "tag in tags" :key = "tag.id" :to = "`/labels/${tag.id}`" class = "tagItem">
         <span>{{ tag.name }}</span>
         <Icon name = "rightArrow"/>
       </router-link>
     </div>
     <div class = "newTag-wrapper">
-      <button class = "newTag" @click = "createTag">新增标签</button>
+      <Button class = "newTag" @click.native = "createTag">新增标签</Button>
     </div>
   </Layout>
 </template>
@@ -16,8 +16,11 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import tagsModel from '@/models/tagsModel';
+  import Button from '@/components/Button.vue';
 
-  @Component
+  @Component({
+    components: {Button}
+  })
   export default class Labels extends Vue {
     tags = tagsModel.getData();
 
@@ -52,20 +55,9 @@
     }
   }
 
-  .newTag {
-    border: none;
-    padding: 0 16px;
-    background: $color-highlight;
-    color: #FFF;
-    line-height: 36px;
-    font-weight: bold;
-    font-size: 16px;
-    border-radius: 6px;
-
-    &-wrapper {
-      text-align: center;
-      padding: 24px 0;
-      margin-top: 24px;
-    }
+  .newTag-wrapper {
+    text-align: center;
+    padding: 24px 0;
+    margin-top: 24px;
   }
 </style>

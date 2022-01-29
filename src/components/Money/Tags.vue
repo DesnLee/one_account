@@ -14,6 +14,7 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
+  import tagsModel from '@/models/tagsModel';
 
   @Component
   export default class Tags extends Vue {
@@ -28,7 +29,10 @@
 
     create(): void {
       const tag = window.prompt('请输入标签名');
-      if (tag) { this.$emit('update:dataList', [...this.dataList, tag]); }
+      if (tag) {
+        const result = tagsModel.create(tag);
+        window.alert(result.message);
+      }
     }
   }
 </script>

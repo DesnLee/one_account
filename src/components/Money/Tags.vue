@@ -1,8 +1,9 @@
 <template>
   <section class = "tags">
     <ul class = "current">
-      <li v-for = "tag in dataList" :key = "tag" :class = "{selected : value.indexOf(tag) >= 0}" @click = "toggle(tag)">
-        {{ tag }}
+      <li v-for = "tag in dataList" :key = "tag.id" :class = "{selected : value.indexOf(tag) >= 0}"
+          @click = "toggle(tag)">
+        {{ tag.name }}
       </li>
     </ul>
     <div class = "new">
@@ -18,10 +19,10 @@
 
   @Component
   export default class Tags extends Vue {
-    @Prop(Array) readonly dataList!: string[];
-    @Prop(Array) readonly value!: string[];
+    @Prop(Array) readonly dataList!: Tag[];
+    @Prop(Array) readonly value!: Tag[];
 
-    toggle(tag: string): void {
+    toggle(tag: Tag): void {
       const index = this.value.indexOf(tag);
       index < 0 ? this.value.push(tag) : this.value.splice(index, 1);
       this.$emit('update:value', this.value);

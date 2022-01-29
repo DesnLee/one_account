@@ -96,7 +96,6 @@
       padding: 0 8px 24px 8px;
 
       > button {
-        background: #F4F4F4;
         color: $color-second;
         font-size: 18px;
         font-weight: bold;

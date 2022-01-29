@@ -6,6 +6,11 @@ interface Account {
   createAt?: Date;
 }
 
+interface Tag {
+  id: number;
+  name: string;
+}
+
 interface accountModel {
   accounts: Account[];
   getData: () => Account[];
@@ -14,8 +19,8 @@ interface accountModel {
 }
 
 interface tagsModel {
-  data: string[];
-  getData: () => string[];
+  data: Tag[];
+  getData: () => Tag[];
   create: (name: string) => { code: number, message: string };
   save: () => { code: number, message: string };
 }

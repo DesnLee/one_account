@@ -4,7 +4,8 @@ const tagsModel = {
     getData() {
         this.data = JSON.parse(window.localStorage.getItem(localStorageName) || '[]');
         if (this.data.length === 0) {
-            this.data = ['衣', '食', '住', '行'];
+            this.data = [{ id: 1, name: '衣' }, { id: 2, name: '食' }, { id: 3, name: '住' }, { id: 4, name: '行' }];
+            window.localStorage.setItem('_currentId', '4');
             this.save();
         }
         return this.data;
@@ -13,10 +14,11 @@ const tagsModel = {
         if (!name) {
             return { code: 1001, message: '标签不能为空' };
         }
-        if (this.data.indexOf(name) >= 0) {
+        const tagName = this.data.map(item => item.name);
+        if (tagName) {
             return { code: 1000, message: '标签已存在，请勿重复添加' };
         }
-        this.data.push(name);
+        this.data.push(tagName);
         return this.save();
     },
     save() {

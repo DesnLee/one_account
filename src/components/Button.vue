@@ -1,5 +1,5 @@
 <template>
-    <button :style = "style">
+    <button :style = "customStyle">
       <slot/>
     </button>
 </template>
@@ -14,7 +14,7 @@
   }
   @Component
   export default class Button extends Vue {
-    @Prop({default: {'background': '#2E64C9'}}) style!: Style;
+    @Prop() customStyle!: Style;
   }
 </script>
 

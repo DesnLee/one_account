@@ -41,8 +41,6 @@
       this.account.tags = [];
       this.account.marks = '';
     }
-
-
   }
 </script>
 

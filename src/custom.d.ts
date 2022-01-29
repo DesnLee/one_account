@@ -21,6 +21,6 @@ interface accountModel {
 interface tagsModel {
   data: Tag[];
   getData: () => Tag[];
-  create: (name: string) => { code: number, message: string };
+  create: (name: string | null) => { code: number, message: string };
   save: () => { code: number, message: string };
 }

@@ -1,7 +1,9 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags :data-list.sync = "tags" :value.sync = "account.tags"/>
-    <Marks :value.sync = "account.marks"/>
+    <Tags class = "tags" :data-list.sync = "tags" :value.sync = "account.tags"/>
+    <section class = "marks-wrapper">
+      <InputBar :value.sync = "account.marks" name = "备注" placeholder = "请在此添加备注..."/>
+    </section>
     <Types :value.sync = "account.type"/>
     <Keyboards :value.sync = "account.count" @saveAccount = "saveAccount"/>
   </Layout>
@@ -11,7 +13,7 @@
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Tags from '@/components/Money/Tags.vue';
-  import Marks from '@/components/Money/Marks.vue';
+  import InputBar from '@/components/InputBar.vue';
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
   import accountModel from '@/models/accountModel';
@@ -22,7 +24,7 @@
   tagsModel.getData();
 
   @Component({
-    components: {Keyboards, Types, Marks, Tags}
+    components: {Keyboards, Types, InputBar, Tags}
   })
   export default class Money extends Vue {
     tags = tagsModel.data;
@@ -45,9 +47,17 @@
 </script>
 
 <style lang = "scss">
+  .tags {
+    background: #FFF;
+  }
+
   .money-content {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+  }
+
+  .marks-wrapper {
+    padding: 8px 0;
   }
 </style>

@@ -29,8 +29,8 @@
 
     create(): void {
       const tag = window.prompt('请输入标签名');
-      if (tag) {
-        const result = tagsModel.create(tag);
+      const result = tagsModel.create(tag);
+      if (result.code !== 1001) {
         window.alert(result.message);
       }
     }

@@ -11,8 +11,8 @@
   @Component
   export default class Marks extends Vue {
     @Prop(String) readonly value!: string;
-    @Prop({required: true}) readonly name: string;
-    @Prop({required: true}) readonly placeholder: string;
+    @Prop({required: true}) name!: string;
+    @Prop({required: true}) readonly placeholder!: string;
 
     input = '';
 

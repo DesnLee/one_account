@@ -1,7 +1,7 @@
 <template>
   <Layout>
     <div class = "tags">
-      <router-link v-for = "tag in tags" :key = "tag.id" :to = "`/label/${tag.id}`">
+      <router-link class = "tagItem" v-for = "tag in tags" :key = "tag.id" :to = "`/labels/${tag.id}`">
         <span>{{ tag.name }}</span>
         <Icon name = "rightArrow"/>
       </router-link>
@@ -39,7 +39,7 @@
     padding-left: 16px;
     color: $color-main;
 
-    li {
+    .tagItem {
       border-bottom: 1px solid #F2F2F2;
       display: flex;
       align-items: center;

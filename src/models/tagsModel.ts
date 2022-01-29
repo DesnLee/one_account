@@ -12,6 +12,7 @@ const tagsModel: tagsModel = {
   },
 
   create(name) {
+    if (!name) {return {code: 1001, message: '标签不能为空'};}
     if (this.data.indexOf(name) >= 0) {
       return {code: 1000, message: '标签已存在，请勿重复添加'};
     }

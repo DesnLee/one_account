@@ -15,7 +15,24 @@ Vue.component('Navbar', NavBar);
 Vue.component('Layout', Layout);
 Vue.component('Icon', Icon);
 
+// 封装 tag 和 account 方法
 window.tagsData = tagsModel.getData();
+window.createTag = (name) => {
+  const result = tagsModel.create(name);
+  if (result.code !== 1001) {
+    window.alert(result.message);
+  }
+  return result;
+};
+window.deleteTag = (id) => {
+  return tagsModel.delete(id);
+};
+window.updateTag = (tag) => {
+  return tagsModel.update(tag);
+};
+window.findTag = (id) => {
+  return window.tagsData.filter(item => item.id === parseInt(id))[0];
+};
 window.accountsData = accountModel.getData();
 
 new Vue({

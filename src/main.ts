@@ -17,7 +17,8 @@ Vue.component('Icon', Icon);
 
 // 封装 tag 和 account 方法
 window.tagsData = tagsModel.getData();
-window.createTag = (name) => {
+window.createTag = () => {
+  const name = window.prompt('请输入标签名');
   const result = tagsModel.create(name);
   if (result.code !== 1001) {
     window.alert(result.message);
@@ -28,7 +29,11 @@ window.deleteTag = (id) => {
   return tagsModel.delete(id);
 };
 window.updateTag = (tag) => {
-  return tagsModel.update(tag);
+  const result = tagsModel.update(tag);
+  if (result.code !== 1) {
+    window.alert(result.message);
+  }
+  return result;
 };
 window.findTag = (id) => {
   return window.tagsData.filter(item => item.id === parseInt(id))[0];

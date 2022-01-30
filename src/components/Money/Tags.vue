@@ -15,7 +15,6 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
-  import tagsModel from '@/models/tagsModel';
 
   @Component
   export default class Tags extends Vue {
@@ -29,8 +28,8 @@
     }
 
     create(): void {
-      const tag = window.prompt('请输入标签名');
-      const result = tagsModel.create(tag);
+      const name = window.prompt('请输入标签名');
+      const result = window.createTag(name);
       if (result.code !== 1001) {
         window.alert(result.message);
       }

@@ -1,4 +1,4 @@
-function deepClone(data: any): Account {
+function deepClone(data: any): any {
   return JSON.parse(JSON.stringify(data));
 }
 

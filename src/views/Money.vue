@@ -16,7 +16,6 @@
   import InputBar from '@/components/InputBar.vue';
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
-  import accountModel from '@/models/accountModel';
 
   @Component({
     components: {Keyboards, Types, InputBar, Tags}
@@ -31,8 +30,7 @@
     };
 
     saveAccount(): void {
-      const result = accountModel.create(this.account);
-      window.alert(result.message);
+      window.createAccount(this.account);
 
       // 重置状态
       this.account.tags = [];

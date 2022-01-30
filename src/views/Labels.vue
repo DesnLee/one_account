@@ -15,7 +15,6 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import tagsModel from '@/models/tagsModel';
   import Button from '@/components/Button.vue';
 
   @Component({
@@ -26,10 +25,7 @@
 
     createTag(): void {
       const newTag = window.prompt('请输入标签名');
-      const result = tagsModel.create(newTag);
-      if (result.code !== 1001) {
-        window.alert(result.message);
-      }
+      window.createTag(newTag);
     }
   }
 </script>

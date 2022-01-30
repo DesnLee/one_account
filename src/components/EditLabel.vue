@@ -1,7 +1,7 @@
 <template>
     <div>
       <TitleBar name = "编辑标签"/>
-      <InputBar :value.sync = "name" class = "input" name = "标签名" placeholder = "请输入标签名..."/>
+      <InputBar :value.sync = "tag.name" class = "input" name = "标签名" placeholder = "请输入标签名..."/>
       <div class = "btn-wrapper">
         <Button :customStyle = "{'background': '#C0C4CC'}" @click.native = "deleteTag">删除标签</Button>
         <Button @click.native = "updateTag">确认修改</Button>
@@ -12,38 +12,32 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import tagsModel from '@/models/tagsModel';
   import TitleBar from '@/components/TitleBar.vue';
   import InputBar from '@/components/InputBar.vue';
   import Button from '@/components/Button.vue';
+  import deepClone from '@/lib/deepClone';
 
   @Component({
     components: {Button, InputBar, TitleBar}
   })
   export default class EditLabel extends Vue {
-    name!: string;
-    id = parseInt(this.$route.params.id);
+    tag?: Tag = undefined;
+    id = this.$route.params.id;
 
     created(): void {
-      for (const item of window.tagsData) {
-        if (item.id === this.id) {
-          this.name = item.name;
-        }
-      }
-
-      if (!this.name) {
+      this.tag = deepClone(window.findTag(this.id));
+      if (!this.tag) {
         this.$router.replace('/404');
       }
     }
 
     deleteTag(): void {
-      tagsModel.delete(this.id);
+      window.deleteTag(this.id);
       this.$router.back();
     }
 
     updateTag(): void {
-      const result = tagsModel.update(this.id, this.name);
-
+      const result = window.updateTag(this.tag as Tag);
       if (result.code !== 1) {
         window.alert(result.message);
       } else {

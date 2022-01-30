@@ -26,3 +26,8 @@ interface tagsModel {
   delete: (id: number) => { code: number, message: string };
   save: () => { code: number, message: string };
 }
+
+interface Window {
+  tagsData: Tag[];
+  accountsData: Account[];
+}

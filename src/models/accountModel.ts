@@ -1,4 +1,4 @@
-import common from '@/models/commonModel';
+import deepClone from '../lib/deepClone';
 
 const localStorageName = 'savedAccount';
 const accountModel: accountModel = {
@@ -10,7 +10,7 @@ const accountModel: accountModel = {
   },
 
   create(data) {
-    const cloneData = common.deepClone(data);
+    const cloneData = deepClone(data);
     cloneData.createAt = new Date();
     this.accounts.push(cloneData);
     return this.save();

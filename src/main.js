@@ -36,6 +36,11 @@ window.findTag = (id) => {
     return window.tagsData.filter(item => item.id === parseInt(id))[0];
 };
 window.accountsData = accountModel.getData();
+window.createAccount = (account) => {
+    const result = accountModel.create(account);
+    window.alert(result.message);
+    return result;
+};
 new Vue({
     router,
     store,

@@ -34,4 +34,5 @@ interface Window {
   createTag: () => { code: number, message: string };
   updateTag: (tag: Tag) => { code: number, message: string };
   accountsData: Account[];
+  createAccount: (account: Account) => { code: number, message: string };
 }

@@ -31,7 +31,7 @@ interface Window {
   tagsData: Tag[];
   findTag: (id: string) => Tag | undefined;
   deleteTag: (id: string) => { code: number, message: string };
-  createTag: (name: string | null) => { code: number, message: string };
+  createTag: () => { code: number, message: string };
   updateTag: (tag: Tag) => { code: number, message: string };
   accountsData: Account[];
 }

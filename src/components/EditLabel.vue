@@ -25,9 +25,7 @@
     id = parseInt(this.$route.params.id);
 
     created(): void {
-      const tags = tagsModel.getData();
-
-      for (const item of tags) {
+      for (const item of window.tagsData) {
         if (item.id === this.id) {
           this.name = item.name;
         }

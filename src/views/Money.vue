@@ -17,17 +17,12 @@
   import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
   import accountModel from '@/models/accountModel';
-  import tagsModel from '@/models/tagsModel';
-
-  // 同步 localStorage 账单和标签数据
-  accountModel.getData();
-  tagsModel.getData();
 
   @Component({
     components: {Keyboards, Types, InputBar, Tags}
   })
   export default class Money extends Vue {
-    tags = tagsModel.data;
+    tags = window.tagsData;
     account: Account = {
       tags: [],
       marks: '',

@@ -28,11 +28,7 @@
     }
 
     create(): void {
-      const name = window.prompt('请输入标签名');
-      const result = window.createTag(name);
-      if (result.code !== 1001) {
-        window.alert(result.message);
-      }
+      window.createTag();
     }
   }
 </script>

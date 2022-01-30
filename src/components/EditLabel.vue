@@ -38,9 +38,7 @@
 
     updateTag(): void {
       const result = window.updateTag(this.tag as Tag);
-      if (result.code !== 1) {
-        window.alert(result.message);
-      } else {
+      if (result.code === 1) {
         this.$router.back();
       }
     }

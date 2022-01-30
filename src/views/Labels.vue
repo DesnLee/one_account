@@ -24,8 +24,7 @@
     tags = window.tagsData;
 
     createTag(): void {
-      const newTag = window.prompt('请输入标签名');
-      window.createTag(newTag);
+      window.createTag();
     }
   }
 </script>

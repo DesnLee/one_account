@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags class = "tags" :value.sync = "account.tags"/>
+    <Tags :value.sync = "account.tags" class = "tags"/>
     <section class = "marks-wrapper">
       <InputBar :value.sync = "account.marks" name = "备注" placeholder = "请在此添加备注..."/>
     </section>
@@ -28,9 +28,14 @@
       count: 0,
     };
 
-    saveAccount(): void {
-      window.createAccount(this.account);
+    created() {
+      this.$store.commit('tags/fetch');
+      this.$store.commit('accounts/fetch');
+    }
 
+    async saveAccount(): Promise<void> {
+      const result = await this.$store.dispatch('accounts/create', this.account);
+      window.alert(result.message);
       // 重置状态
       this.account.tags = [];
       this.account.marks = '';

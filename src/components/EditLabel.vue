@@ -12,32 +12,40 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import {mapGetters} from 'vuex';
   import TitleBar from '@/components/TitleBar.vue';
   import InputBar from '@/components/InputBar.vue';
   import Button from '@/components/Button.vue';
   import deepClone from '@/lib/deepClone';
 
   @Component({
-    components: {Button, InputBar, TitleBar}
+    components: {Button, InputBar, TitleBar},
+    computed: {
+      ...mapGetters('tags', {
+        findById: 'findById'
+      })
+    }
   })
   export default class EditLabel extends Vue {
     tag?: Tag = undefined;
-    id = this.$route.params.id;
 
     created(): void {
-      this.tag = deepClone(window.findTag(this.id));
+      this.$store.commit('tags/fetch');
+      this.tag = deepClone((this as any).findById(this.$route.params.id));
       if (!this.tag) {
         this.$router.replace('/404');
       }
     }
 
-    deleteTag(): void {
-      window.deleteTag(this.id);
-      this.$router.back();
+    async deleteTag(): Promise<void> {
+      const result = await this.$store.dispatch('tags/delete', this.tag);
+      if (result.code === 1) {
+        this.$router.back();
+      }
     }
 
-    updateTag(): void {
-      const result = window.updateTag(this.tag as Tag);
+    async updateTag(): Promise<void> {
+      const result = await this.$store.dispatch('tags/update', this.tag);
       if (result.code === 1) {
         this.$router.back();
       }

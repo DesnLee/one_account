@@ -15,16 +15,24 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
+  import {mapState} from 'vuex';
   import Button from '@/components/Button.vue';
 
   @Component({
-    components: {Button}
+    components: {Button},
+    computed: {
+      ...mapState('tags', {
+        tags: (state: any) => state.tagsData
+      })
+    }
   })
   export default class Labels extends Vue {
-    tags = window.tagsData;
+    created() {
+      this.$store.commit('tags/fetch');
+    }
 
     createTag(): void {
-      window.createTag();
+      this.$store.dispatch('tags/create');
     }
   }
 </script>

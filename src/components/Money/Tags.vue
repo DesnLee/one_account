@@ -1,7 +1,7 @@
 <template>
   <section class = "tags">
     <ul class = "current">
-      <li v-for = "tag in dataList" :key = "tag.id" :class = "{selected : value.indexOf(tag) >= 0}"
+      <li v-for = "tag in tagsData" :key = "tag.id" :class = "{selected : value.indexOf(tag) >= 0}"
           @click = "toggle(tag)">
         {{ tag.name }}
       </li>
@@ -15,11 +15,21 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
+  import {mapState} from 'vuex';
 
-  @Component
+  @Component({
+    computed: {
+      ...mapState('tags', {
+        tagsData: (state: any) => state.tagsData,
+      })
+    },
+  })
   export default class Tags extends Vue {
-    @Prop(Array) readonly dataList!: Tag[];
     @Prop(Array) readonly value!: Tag[];
+
+    created() {
+      this.$store.commit('tags/fetch');
+    }
 
     toggle(tag: Tag): void {
       const index = this.value.indexOf(tag);
@@ -27,8 +37,8 @@
       this.$emit('update:value', this.value);
     }
 
-    create(): void {
-      window.createTag();
+    async create(): Promise<void> {
+      await this.$store.dispatch('tags/create');
     }
   }
 </script>

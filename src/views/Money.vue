@@ -1,6 +1,6 @@
 <template>
   <Layout class-prefix = "money">
-    <Tags class = "tags" :data-list.sync = "tags" :value.sync = "account.tags"/>
+    <Tags class = "tags" :value.sync = "account.tags"/>
     <section class = "marks-wrapper">
       <InputBar :value.sync = "account.marks" name = "备注" placeholder = "请在此添加备注..."/>
     </section>
@@ -21,7 +21,6 @@
     components: {Keyboards, Types, InputBar, Tags}
   })
   export default class Money extends Vue {
-    tags = window.tagsData;
     account: Account = {
       tags: [],
       marks: '',

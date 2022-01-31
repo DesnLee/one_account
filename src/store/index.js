@@ -1,19 +1,12 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import tags from '@/store/tagStore';
-import accounts from '@/store/accountStore';
+import tags from '@/store/modules/tags';
+import accounts from '@/store/modules/accounts';
 Vue.use(Vuex);
-const store = new Vuex.Store({
+export default new Vuex.Store({
     modules: {
-        tags: {
-            namespaced: true,
-            ...tags
-        },
-        accounts: {
-            namespaced: true,
-            ...accounts
-        }
+        tags,
+        accounts
     }
 });
-export default store;
 //# sourceMappingURL=index.js.map

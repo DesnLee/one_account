@@ -1,15 +1,21 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import tags from '@/store/tagStore';
+import accounts from '@/store/accountStore';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+const store = new Vuex.Store({
   modules: {
+    tags: {
+      namespaced: true,
+      ...tags
+    },
+    accounts: {
+      namespaced: true,
+      ...accounts
+    }
   }
-})
+});
+
+export default store;

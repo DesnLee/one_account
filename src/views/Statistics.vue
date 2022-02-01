@@ -5,7 +5,10 @@
     </div>
     <ol v-if = "findByType.length > 0" class = "blockList">
       <li v-for = "(group, index) in finalList" :key = "index" class = "blockItem">
-        <h3>{{ beautifyDate(group.title) }}</h3>
+        <div class = "titleBar">
+          <h3>{{ beautifyDate(group.title) }}</h3>
+          <h3>合计 ¥{{ beautifyNumber(group.total) }}</h3>
+        </div>
         <ol class = "accountList">
           <li v-for = "(item, index) in group.items" :key = "index" class = "accountItem">
             <div class = "accountItem-top">
@@ -14,7 +17,7 @@
               </div>
               <div class = "right">
                 <span class = "cny">¥</span>
-                <span class = "count">{{ item.count }}</span>
+                <span class = "count">{{ beautifyNumber(item.count) }}</span>
               </div>
             </div>
             <p v-if = "item.marks" class = "accountItem-marks">{{ item.marks }}</p>
@@ -59,16 +62,16 @@
       for (const item of sortedList) {
         const formatDate = dayjs(item.createAt).format('YYYY-MM-DD');
         if (!resultList[0]) {
-          resultList.push({title: formatDate, items: [item]});
+          resultList.push({title: formatDate, total: item.count, items: [item]});
           continue;
         }
         if (resultList[0].title === formatDate) {
+          resultList[0].total += item.count;
           resultList[0].items.unshift(item);
         } else {
-          resultList.unshift({title: formatDate, items: [item]});
+          resultList.unshift({title: formatDate, total: item.count, items: [item]});
         }
       }
-      console.log(resultList);
       return resultList;
     }
 
@@ -94,6 +97,12 @@
       } else {
         return targetDay.format('YYYY年M月D日');
       }
+    }
+
+    beautifyNumber(num: number) {
+      const [int, float] = num.toString().split('.');
+      const afterInt = int.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,');
+      return float ? afterInt + '.' + float : afterInt;
     }
 
     created() {
@@ -151,12 +160,17 @@
     > .blockItem {
       margin-top: 8px;
 
-      > h3 {
-        color: $color-grey;
-        font-weight: normal;
-        font-size: 14px;
-        line-height: 2;
-        padding: 0 16px;
+      > .titleBar {
+        display: flex;
+        justify-content: space-between;
+
+        h3 {
+          color: $color-grey;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 2;
+          padding: 0 16px;
+        }
       }
 
       > .accountList {
@@ -196,7 +210,7 @@
           > .accountItem-marks {
             color: $color-third;
             font-size: 12px;
-            margin-top: 8px;
+            margin-top: 4px;
           }
 
         }

@@ -18,6 +18,7 @@ interface TagState {
 
 interface AccountTable {
   title: string;
+  total: number;
   items: Account[];
 }
 

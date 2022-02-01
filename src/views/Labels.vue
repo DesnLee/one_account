@@ -17,20 +17,17 @@
 </template>
 
 <script lang = "ts">
-  import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Button from '@/components/Button.vue';
+  import InitPage from '@/mixins/InitPage';
+  import {mixins} from 'vue-class-component';
 
   @Component({
     components: {Button},
   })
-  export default class Labels extends Vue {
+  export default class Labels extends mixins(InitPage) {
     get tags() {
       return this.$store.state.tags.tagsData;
-    }
-
-    created() {
-      this.$store.commit('tags/fetch');
     }
 
     createTag(): void {

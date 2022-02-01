@@ -10,18 +10,19 @@
 </template>
 
 <script lang = "ts">
-  import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Tags from '@/components/Money/Tags.vue';
   import InputBar from '@/components/InputBar.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
   import Tabs from '@/components/Tabs.vue';
   import typeList from '@/constant/typeList';
+  import InitPage from '@/mixins/InitPage';
+  import {mixins} from 'vue-class-component';
 
   @Component({
     components: {Tabs, Keyboards, InputBar, Tags}
   })
-  export default class Money extends Vue {
+  export default class Money extends mixins(InitPage) {
     typeList = typeList;
     account: Account = {
       tags: [],

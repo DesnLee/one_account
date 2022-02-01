@@ -33,17 +33,18 @@
 </template>
 
 <script lang = "ts">
-  import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
   import Tabs from '@/components/Tabs.vue';
   import typeList from '@/constant/typeList';
   import dayjs from 'dayjs';
   import deepClone from '@/lib/deepClone';
+  import InitPage from '@/mixins/InitPage';
+  import {mixins} from 'vue-class-component';
 
   @Component({
     components: {Tabs}
   })
-  export default class Statistics extends Vue {
+  export default class Statistics extends mixins(InitPage) {
     typeList = typeList;
     typeValue = this.typeList[0].value;
 
@@ -104,10 +105,6 @@
       const [int, float] = num.toString().split('.');
       const afterInt = int.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,');
       return float ? afterInt + '.' + float : afterInt;
-    }
-
-    created() {
-      this.$store.commit('accounts/fetch');
     }
   }
 </script>

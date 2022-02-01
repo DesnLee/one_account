@@ -56,9 +56,9 @@
     }
 
     get finalList() {
-      if (this.accountList.length === 0) return [];
-      const sortedList = deepClone(this.findByType).sort((a, b) => dayjs(a.createAt) - dayjs(b.createAt));
-      const resultList: AccountTable = [];
+      if (this.accountList.length <= 1) return this.accountList;
+      const sortedList = deepClone(this.findByType).sort((a: Account, b: Account) => dayjs(a.createAt).valueOf() - dayjs(b.createAt).valueOf());
+      const resultList: AccountTable[] = [];
       for (const item of sortedList) {
         const formatDate = dayjs(item.createAt).format('YYYY-MM-DD');
         if (!resultList[0]) {
@@ -79,7 +79,7 @@
       return this.accountList.filter((item: Account) => item.type === this.typeValue);
     }
 
-    formatTags(tags: Tag[]) {
+    formatTags(tags: string[]) {
       return tags.length === 0 ? '无标签' : tags.map(tag => tag.name).join('，');
     }
 

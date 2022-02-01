@@ -1,8 +1,7 @@
 <template>
-  <ul class = "types">
-    <li :class = "value === '-' && 'selected'" @click = "selectType('-')">支出
-    </li>
-    <li :class = "value === '+' && 'selected'" @click = "selectType('+')">收入
+  <ul class = "tabs">
+    <li v-for = "data in dataList" :key = "data.value" :class = "{selected:value===data.value}" @click = "select(data)">
+      {{ data.text }}
     </li>
   </ul>
 </template>
@@ -12,14 +11,13 @@
   import {Component, Prop} from 'vue-property-decorator';
 
   @Component
-  export default class Types extends Vue {
-    @Prop(String) readonly value!: string;
+  export default class Tabs extends Vue {
+    @Prop({required: true}) dataList!: { text: string, value: string }[];
+    @Prop() value!: string;
 
-    selectType(type: string): void {
-      if (type !== '-' && type !== '+') {
-        throw new Error('type is undefined');
-      }
-      this.$emit('update:value', type);
+    select(data) {
+      console.log(data);
+      this.$emit('update:value', data.value);
     }
   }
 </script>
@@ -27,7 +25,7 @@
 <style lang = "scss" scoped>
   @import "~@/assets/styles/helper.scss";
 
-  .types {
+  .tabs {
     display: flex;
     text-align: center;
     font-size: 20px;

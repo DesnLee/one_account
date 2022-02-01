@@ -22,7 +22,7 @@
 
 <script lang = "ts">
   import Vue from 'vue';
-  import {Component, Prop} from 'vue-property-decorator';
+  import {Component, Prop, Watch} from 'vue-property-decorator';
 
   @Component
   export default class Keyboards extends Vue {
@@ -60,7 +60,13 @@
       if (parseFloat(this.output) !== 0) {
         this.$emit('update:value', parseFloat(this.output));
         this.$emit('saveAccount');
-        this.clearAll();
+      }
+    }
+
+    @Watch('value')
+    onValueChanged() {
+      if (this.value === 0) {
+        this.output = '0';
       }
     }
   }

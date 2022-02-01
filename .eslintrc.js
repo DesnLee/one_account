@@ -21,7 +21,8 @@ module.exports = {
   globals : {
     '__WebpackModuleApi' : 'writable',
     'Account' : true,
-    'Tag' : true
+    'Tag' : true,
+    'HashTable' : true
   },
   overrides : [
     {

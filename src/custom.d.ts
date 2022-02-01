@@ -3,7 +3,7 @@ interface Account {
   marks: string;
   type: string;
   count: number;
-  createAt?: Date;
+  createAt?: string;
 }
 
 interface Tag {
@@ -14,6 +14,10 @@ interface Tag {
 interface TagState {
   tagsData: Tag[];
   currentTag: Tag | undefined;
+}
+
+interface HashTable {
+  [propName: string]: Account[];
 }
 
 // interface Window {

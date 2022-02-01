@@ -31,17 +31,17 @@
       count: 0,
     };
 
-    created() {
-      this.$store.commit('tags/fetch');
-      this.$store.commit('accounts/fetch');
-    }
-
     async saveAccount(): Promise<void> {
+      if (this.account.tags.length === 0) {
+        window.alert('请至少选择一项标签');
+        return;
+      }
       const result = await this.$store.dispatch('accounts/create', this.account);
       window.alert(result.message);
       // 重置状态
       this.account.tags = [];
       this.account.marks = '';
+      this.account.count = 0;
     }
   }
 </script>

@@ -26,7 +26,6 @@
   }
 
   .content {
-    overflow: hidden;
     flex-grow: 1;
   }
 </style>

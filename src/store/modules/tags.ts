@@ -2,8 +2,9 @@ import createId from '@/lib/createId';
 
 const localStorageName = 'savedTags';
 
-const state = {
-  tagsData: [] as Tag[]
+const state: tagState = {
+  tagsData: [],
+  currentTag: undefined
 };
 
 const getters = {
@@ -18,6 +19,9 @@ const getters = {
 const mutations = {
   fetch(state: any) {
     state.tagsData = JSON.parse(window.localStorage.getItem(localStorageName) || '[]');
+  },
+  getCurrentTag(state: any, id: string | number) {
+    state.currentTag = state.tagsData.filter((item: Tag) => item.id === parseInt(id + ''))[0];
   }
 };
 

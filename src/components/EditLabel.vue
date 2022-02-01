@@ -12,26 +12,23 @@
 <script lang = "ts">
   import Vue from 'vue';
   import {Component} from 'vue-property-decorator';
-  import {mapGetters} from 'vuex';
   import TitleBar from '@/components/TitleBar.vue';
   import InputBar from '@/components/InputBar.vue';
   import Button from '@/components/Button.vue';
   import deepClone from '@/lib/deepClone';
 
   @Component({
-    components: {Button, InputBar, TitleBar},
-    computed: {
-      ...mapGetters('tags', {
-        findById: 'findById'
-      })
-    }
+    components: {Button, InputBar, TitleBar}
   })
   export default class EditLabel extends Vue {
-    tag?: Tag = undefined;
+    get tag() {
+      return deepClone(this.$store.state.tags.currentTag);
+    }
 
     created(): void {
       this.$store.commit('tags/fetch');
-      this.tag = deepClone((this as any).findById(this.$route.params.id));
+      this.$store.commit('tags/getCurrentTag', this.$route.params.id);
+
       if (!this.tag) {
         this.$router.replace('/404');
       }

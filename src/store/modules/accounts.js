@@ -22,7 +22,7 @@ const actions = {
     },
     async create({ dispatch, state }, data) {
         const cloneData = deepClone(data);
-        cloneData.createAt = new Date();
+        cloneData.createAt = new Date().toISOString();
         state.accountsData.push(cloneData);
         return new Promise(resolve => {
             dispatch('save').then((result) => {

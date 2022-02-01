@@ -7,7 +7,7 @@
       <li v-for = "(group, index) in finalList" :key = "index" class = "blockItem">
         <div class = "titleBar">
           <h3>{{ beautifyDate(group.title) }}</h3>
-          <h3>合计 ¥{{ beautifyNumber(group.total) }}</h3>
+          <h3>合计 ¥{{ group.total }}</h3>
         </div>
         <ol class = "accountList">
           <li v-for = "(item, index) in group.items" :key = "index" class = "accountItem">
@@ -17,7 +17,7 @@
               </div>
               <div class = "right">
                 <span class = "cny">¥</span>
-                <span class = "count">{{ beautifyNumber(item.count) }}</span>
+                <span class = "count">{{ item.count }}</span>
               </div>
             </div>
             <p v-if = "item.marks" class = "accountItem-marks">{{ item.marks }}</p>
@@ -56,7 +56,7 @@
     }
 
     get finalList() {
-      if (this.accountList.length <= 1) return this.accountList;
+      if (this.accountList.length <= 0) return this.accountList;
       const sortedList = deepClone(this.findByType).sort((a: Account, b: Account) => dayjs(a.createAt).valueOf() - dayjs(b.createAt).valueOf());
       const resultList: AccountTable[] = [];
       for (const item of sortedList) {
@@ -79,7 +79,7 @@
       return this.accountList.filter((item: Account) => item.type === this.typeValue);
     }
 
-    formatTags(tags: string[]) {
+    formatTags(tags: Tag[]) {
       return tags.length === 0 ? '无标签' : tags.map(tag => tag.name).join('，');
     }
 
@@ -100,6 +100,7 @@
     }
 
     beautifyNumber(num: number) {
+      console.log(num);
       const [int, float] = num.toString().split('.');
       const afterInt = int.replace(/(\d{1,3})(?=(\d{3})+$)/g, '$1,');
       return float ? afterInt + '.' + float : afterInt;

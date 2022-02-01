@@ -1,4 +1,5 @@
 import createId from '@/lib/createId';
+// import initTags from '@/constant/initTags';
 const localStorageName = 'savedTags';
 const state = {
     tagsData: [],
@@ -72,7 +73,17 @@ const actions = {
                 return resolve(result);
             });
         });
-    }
+    },
+    // async initTags({dispatch, state}: any) {
+    //   state.tagsData = initTags;
+    //   return new Promise(resolve => {
+    //     dispatch('save').then((result: object) => {
+    //       const id = parseInt(window.localStorage.getItem('_currentId') || '0');
+    //       if (id < 4) {window.localStorage.setItem('_currentId', '4');}
+    //       resolve(result);
+    //     });
+    //   });
+    // }
 };
 export default {
     namespaced: true,

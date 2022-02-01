@@ -22,7 +22,7 @@ module.exports = {
     '__WebpackModuleApi' : 'writable',
     'Account' : true,
     'Tag' : true,
-    'HashTable' : true
+    'AccountTable' : true
   },
   overrides : [
     {

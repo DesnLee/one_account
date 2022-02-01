@@ -16,8 +16,9 @@ interface TagState {
   currentTag: Tag | undefined;
 }
 
-interface HashTable {
-  [propName: string]: Account[];
+interface AccountTable {
+  title: string;
+  items: Account[];
 }
 
 // interface Window {

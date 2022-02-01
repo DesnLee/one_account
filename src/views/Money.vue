@@ -4,7 +4,7 @@
     <section class = "marks-wrapper">
       <InputBar :value.sync = "account.marks" name = "备注" placeholder = "请在此添加备注..."/>
     </section>
-    <Types :value.sync = "account.type"/>
+    <Tabs :data-list = "typeList" :value.sync = "account.type"/>
     <Keyboards :value.sync = "account.count" @saveAccount = "saveAccount"/>
   </Layout>
 </template>
@@ -14,13 +14,15 @@
   import {Component} from 'vue-property-decorator';
   import Tags from '@/components/Money/Tags.vue';
   import InputBar from '@/components/InputBar.vue';
-  import Types from '@/components/Money/Types.vue';
   import Keyboards from '@/components/Money/Keyboards.vue';
+  import Tabs from '@/components/Tabs.vue';
+  import typeList from '@/constant/typeList';
 
   @Component({
-    components: {Keyboards, Types, InputBar, Tags}
+    components: {Tabs, Keyboards, InputBar, Tags}
   })
   export default class Money extends Vue {
+    typeList = typeList;
     account: Account = {
       tags: [],
       marks: '',

@@ -11,7 +11,7 @@ interface Tag {
   name: string;
 }
 
-interface tagState {
+interface TagState {
   tagsData: Tag[];
   currentTag: Tag | undefined;
 }

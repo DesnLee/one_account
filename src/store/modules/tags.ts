@@ -2,7 +2,7 @@ import createId from '@/lib/createId';
 
 const localStorageName = 'savedTags';
 
-const state: tagState = {
+const state: TagState = {
   tagsData: [],
   currentTag: undefined
 };

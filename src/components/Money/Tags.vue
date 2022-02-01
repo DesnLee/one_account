@@ -23,10 +23,6 @@
       return this.$store.state.tags.tagsData;
     }
 
-    created() {
-      this.$store.commit('tags/fetch');
-    }
-
     toggle(tag: Tag): void {
       const index = this.value.indexOf(tag);
       index < 0 ? this.value.push(tag) : this.value.splice(index, 1);

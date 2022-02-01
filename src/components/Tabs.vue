@@ -1,6 +1,6 @@
 <template>
-  <ul class = "tabs">
-    <li v-for = "data in dataList" :key = "data.value" :class = "{selected:value===data.value}" @click = "select(data)">
+  <ul :class = "tabsClass()" class = "tabs">
+    <li v-for = "data in dataList" :key = "data.value" :class = "itemClass(data)" @click = "select(data)">
       {{ data.text }}
     </li>
   </ul>
@@ -10,12 +10,31 @@
   import Vue from 'vue';
   import {Component, Prop} from 'vue-property-decorator';
 
+  interface Data {
+    text: string;
+    value: string;
+  }
+
   @Component
   export default class Tabs extends Vue {
     @Prop({required: true}) dataList!: { text: string, value: string }[];
-    @Prop() value!: string;
+    @Prop({required: true}) value!: string;
+    @Prop({required: true}) classPrefix?: string;
 
-    select(data) {
+    tabsClass() {
+      return {
+        [this.classPrefix + '-tabs']: this.classPrefix
+      };
+    }
+
+    itemClass(data: Data) {
+      return {
+        [this.classPrefix + '-tabs-item']: this.classPrefix,
+        selected: data.value === this.value
+      };
+    }
+
+    select(data: Data) {
       console.log(data);
       this.$emit('update:value', data.value);
     }
@@ -25,7 +44,7 @@
 <style lang = "scss" scoped>
   @import "~@/assets/styles/helper.scss";
 
-  .tabs {
+  ul {
     display: flex;
     text-align: center;
     font-size: 20px;

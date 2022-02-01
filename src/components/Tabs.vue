@@ -19,7 +19,7 @@
   export default class Tabs extends Vue {
     @Prop({required: true}) dataList!: { text: string, value: string }[];
     @Prop({required: true}) value!: string;
-    @Prop({required: true}) classPrefix?: string;
+    @Prop(String) classPrefix?: string;
 
     tabsClass() {
       return {
@@ -35,7 +35,6 @@
     }
 
     select(data: Data) {
-      console.log(data);
       this.$emit('update:value', data.value);
     }
   }

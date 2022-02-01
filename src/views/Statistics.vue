@@ -2,16 +2,15 @@
   <Layout class = "container">
     <div class = "tabs-container">
       <Tabs :data-list = "typeList" :value.sync = "typeValue" class-prefix = "type"/>
-      <Tabs :data-list = "intervalList" :value.sync = "intervalValue" class-prefix = "interval"/>
     </div>
-    <ol v-if = "findByType.length > 0" class = "blockList" @click = "log">
-      <li v-for = "(group, index) in resultList" :key = "index" class = "blockItem">
-        <h3>{{ index }}</h3>
+    <ol v-if = "findByType.length > 0" class = "blockList">
+      <li v-for = "(group, index) in finalList" :key = "index" class = "blockItem">
+        <h3>{{ beautifyDate(group.title) }}</h3>
         <ol class = "accountList">
-          <li v-for = "(item, index) in group" :key = "index" class = "accountItem">
+          <li v-for = "(item, index) in group.items" :key = "index" class = "accountItem">
             <div class = "accountItem-top">
               <div>
-                <span>{{ itemTags(item.tags) }}</span>
+                <span>{{ formatTags(item.tags) }}</span>
               </div>
               <div class = "right">
                 <span class = "cny">¥</span>
@@ -25,7 +24,7 @@
     </ol>
     <div v-else class = "pic-wrapper">
       <Icon class = "pic" name = "noData"/>
-      <h2 class = "notDataTips">暂无数据</h2>
+      <h2 class = "notDataTips">暂无{{ currentTab }}数据</h2>
     </div>
   </Layout>
 </template>
@@ -35,47 +34,70 @@
   import {Component} from 'vue-property-decorator';
   import Tabs from '@/components/Tabs.vue';
   import typeList from '@/constant/typeList';
-  import intervalList from '@/constant/intervalList';
+  import dayjs from 'dayjs';
+  import deepClone from '@/lib/deepClone';
 
   @Component({
     components: {Tabs}
   })
   export default class Statistics extends Vue {
     typeList = typeList;
-    intervalList = intervalList;
     typeValue = this.typeList[0].value;
-    intervalValue = this.intervalList[0].value;
-    hashTable: HashTable = {};
+
+    get currentTab() {
+      return this.typeValue === '+' ? '收入' : '支出';
+    }
 
     get accountList() {
       return this.$store.state.accounts.accountsData;
     }
 
-    get resultList() {
-      for (const account of this.accountList) {
-        const [date, time] = account.createAt?.split('T');
-        if (!this.hashTable[date]) {
-          this.hashTable[date] = [];
+    get finalList() {
+      if (this.accountList.length === 0) return [];
+      const sortedList = deepClone(this.findByType).sort((a, b) => dayjs(a.createAt) - dayjs(b.createAt));
+      const resultList: AccountTable = [];
+      for (const item of sortedList) {
+        const formatDate = dayjs(item.createAt).format('YYYY-MM-DD');
+        if (!resultList[0]) {
+          resultList.push({title: formatDate, items: [item]});
+          continue;
         }
-        this.hashTable[date].push(account);
+        if (resultList[0].title === formatDate) {
+          resultList[0].items.unshift(item);
+        } else {
+          resultList.unshift({title: formatDate, items: [item]});
+        }
       }
-      return this.hashTable;
+      console.log(resultList);
+      return resultList;
     }
 
     get findByType() {
-      return this.accountList.map((item: Account) => item.type === this.typeValue);
+      return this.accountList.filter((item: Account) => item.type === this.typeValue);
     }
 
-    itemTags(tags: Tag[]) {
+    formatTags(tags: Tag[]) {
       return tags.length === 0 ? '无标签' : tags.map(tag => tag.name).join('，');
+    }
+
+    beautifyDate(str: string) {
+      const targetDay = dayjs(str);
+      const now = dayjs();
+      if (now.isSame(targetDay, 'day')) {
+        return '今天';
+      } else if (now.isSame(targetDay.add(1, 'day'), 'day')) {
+        return '昨天';
+      } else if (now.isSame(targetDay.add(2, 'day'), 'day')) {
+        return '前天';
+      } else if (now.isSame(targetDay, 'year')) {
+        return targetDay.format('M月D日');
+      } else {
+        return targetDay.format('YYYY年M月D日');
+      }
     }
 
     created() {
       this.$store.commit('accounts/fetch');
-    }
-
-    log() {
-      console.log(this.typeValue);
     }
   }
 </script>
@@ -96,16 +118,12 @@
 
   ::v-deep {
     .type-tabs {
-      background: #FFF;
-      color: $color-second;
+      color: $color-third;
+      background: #F8F8F8;
 
       > .type-tabs-item.selected {
         color: $color-highlight;
-        background: #F8F8F8;
-
-        &::after {
-          height: 0;
-        }
+        background: #FFF;
       }
     }
 

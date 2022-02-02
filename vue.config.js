@@ -3,7 +3,7 @@ const path = require('path')
 
 module.exports = {
   // // 基本路径 baseURL已经过时
-  // publicPath : './',
+  publicPath : '/',
 
   // // 输出文件目录
   // outputDir : 'dist',
@@ -60,7 +60,15 @@ module.exports = {
 
   // // PWA 插件相关配置
   // // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
-  // pwa : {},
+  pwa : {
+    iconPaths : {
+      favicon32 : 'favicon.ico',
+      favicon16 : 'favicon.ico',
+      appleTouchIcon : 'favicon.ico',
+      maskIcon : 'favicon.ico',
+      msTileImage : 'favicon.ico'
+    }
+  },
 
   // // webpack-dev-server 相关配置
   // devServer : {

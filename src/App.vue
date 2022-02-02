@@ -15,5 +15,8 @@
     color: $color-main;
     line-height: 1.5;
     font-size: 14px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>

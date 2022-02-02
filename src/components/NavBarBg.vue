@@ -16,6 +16,6 @@
 
   .navbar-bg {
     height: $height-navbar;
-    width: 100vw;
+    width: 100%;
   }
 </style>

@@ -31,7 +31,8 @@
     background: #F8F8F8;
     position: fixed;
     bottom: 0;
-    width: 100vw;
+    width: 100%;
+    max-width: 500px;
     height: $height-navbar;
 
     & > .item {

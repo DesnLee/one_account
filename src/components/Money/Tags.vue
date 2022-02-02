@@ -56,6 +56,7 @@
           size: 18px;
           weight: bold;
         }
+        cursor: pointer;
         color: $color-second;
         background-color: #F4F4F4;
         $h: 36px;

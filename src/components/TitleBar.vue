@@ -30,6 +30,10 @@
     padding: 16px;
     background: #FFF;
 
+    .leftIcon {
+      cursor: pointer;
+    }
+
     .leftIcon, .rightIcon {
       width: 20px;
       height: 20px;

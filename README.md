@@ -1,4 +1,4 @@
-# wangcai_money
+# One Account ｜ 一笔帐
 
 ## Project setup
 

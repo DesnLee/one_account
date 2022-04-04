@@ -1,38 +1,38 @@
 module.exports = {
-  root : true,
-  env : {
-    node : true
+  root: true,
+  env: {
+    node: true,
   },
-  'extends' : [
+  extends: [
     'plugin:vue/essential',
     'eslint:recommended',
-    '@vue/typescript/recommended'
+    '@vue/typescript/recommended',
   ],
-  parserOptions : {
-    ecmaVersion : 2020
+  parserOptions: {
+    ecmaVersion: 2020,
   },
-  rules : {
-    '@typescript-eslint/ban-types' : 'off',
-    '@typescript-eslint/explicit-module-boundary-types' : 'off',
-    '@typescript-eslint/no-explicit-any' : 'off',
-    'no-console' : process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger' : process.env.NODE_ENV === 'production' ? 'warn' : 'off'
+  rules: {
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
-  globals : {
-    '__WebpackModuleApi' : 'writable',
-    'Account' : true,
-    'Tag' : true,
-    'AccountTable' : true
+  globals: {
+    __WebpackModuleApi: 'writable',
+    Account: true,
+    Tag: true,
+    AccountTable: true,
   },
-  overrides : [
+  overrides: [
     {
-      files : [
+      files: [
         '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/tests/unit/**/*.spec.{j,t}s?(x)',
       ],
-      env : {
-        jest : true
-      }
-    }
-  ]
+      env: {
+        jest: true,
+      },
+    },
+  ],
 }

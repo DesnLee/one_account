@@ -3,13 +3,13 @@ const path = require('path')
 
 module.exports = {
   // // 基本路径 baseURL已经过时
-  publicPath : '/',
+  publicPath: '/',
 
   // // 输出文件目录
   // outputDir : 'dist',
 
   // eslint-loader 是否在保存的时候检查
-  lintOnSave : false,
+  lintOnSave: false,
 
   // // use the full build with in-browser compiler?
   // // https://vuejs.org/v2/guide/installation.html#Runtime-Compiler-vs-Runtime-only
@@ -17,15 +17,21 @@ module.exports = {
 
   // webpack配置
   // see https://github.com/vuejs/vue-cli/blob/dev/docs/webpack.md
-  chainWebpack : config => {
+  chainWebpack: config => {
     const dir = path.resolve(__dirname, 'src/assets/icons')
 
     config.module
-          .rule('svg-sprite')
-          .test(/\.svg$/)
-          .include.add(dir).end() //只包含 icons
-          .use('svg-sprite-loader').loader('svg-sprite-loader').options({extract : false}).end()
-    config.plugin('svg-sprite').use(require('svg-sprite-loader/plugin'), [{plainSprite : true}])
+      .rule('svg-sprite')
+      .test(/\.svg$/)
+      .include.add(dir)
+      .end() //只包含 icons
+      .use('svg-sprite-loader')
+      .loader('svg-sprite-loader')
+      .options({ extract: false })
+      .end()
+    config
+      .plugin('svg-sprite')
+      .use(require('svg-sprite-loader/plugin'), [{ plainSprite: true }])
     config.module.rule('svg').exclude.add(dir) // 其他svg loader 排除 icons 目录
   },
 
@@ -60,14 +66,14 @@ module.exports = {
 
   // // PWA 插件相关配置
   // // see https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-pwa
-  pwa : {
-    iconPaths : {
-      favicon32 : 'favicon.ico',
-      favicon16 : 'favicon.ico',
-      appleTouchIcon : 'favicon.ico',
-      maskIcon : 'favicon.ico',
-      msTileImage : 'favicon.ico'
-    }
+  pwa: {
+    iconPaths: {
+      favicon32: 'favicon.ico',
+      favicon16: 'favicon.ico',
+      appleTouchIcon: 'favicon.ico',
+      maskIcon: 'favicon.ico',
+      msTileImage: 'favicon.ico',
+    },
   },
 
   // // webpack-dev-server 相关配置

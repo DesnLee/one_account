@@ -1,6 +1,6 @@
 <template>
-  <div id = "app">
-    <router-view/>
+  <div id="app">
+    <router-view />
   </div>
 </template>
 
@@ -9,16 +9,16 @@
   import { Component } from 'vue-property-decorator'
 
   @Component
-  export default class App extends Vue{
-    created (){
+  export default class App extends Vue {
+    created() {
       document.title = 'One Account ｜ 一笔帐'
     }
   }
 </script>
 
-<style lang = "scss">
-  @import "~@/assets/styles/reset.scss";
-  @import "~@/assets/styles/helper.scss";
+<style lang="scss">
+  @import '~@/assets/styles/reset.scss';
+  @import '~@/assets/styles/helper.scss';
 
   #app {
     font-family: $font-hei;

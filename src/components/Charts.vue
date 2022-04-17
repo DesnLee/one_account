@@ -4,7 +4,7 @@
 
 <script lang="ts">
   import Vue from 'vue'
-  import { Component, Prop } from 'vue-property-decorator'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
   // import VChart, { THEME_KEY } from 'vue-echarts'
   import * as echarts from 'echarts'
 
@@ -19,9 +19,16 @@
     @Prop(String) currentTab!: '收入' | '支出'
     @Prop(Array) finalList!: Final[]
 
+    chart: echarts.ECharts | undefined
+
+    @Watch('finalList')
+    update() {
+      this.chart?.setOption(this.option)
+    }
+
     mounted() {
-      const chart = echarts.init(this.$refs.chart as HTMLDivElement)
-      chart.setOption(this.option)
+      this.chart = echarts.init(this.$refs.chart as HTMLDivElement)
+      this.chart.setOption(this.option)
     }
 
     get option() {
@@ -41,6 +48,10 @@
       }
 
       return {
+        grid: {
+          right: 12,
+          bottom: 32,
+        },
         title: {
           text: `近 7 天${this.currentTab}统计`,
           subtext:

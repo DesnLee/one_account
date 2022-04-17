@@ -1,39 +1,41 @@
 <template>
-  <label class = "marks"> <span class = "name">{{ name }}</span>
-    <input v-model.trim = "input" :placeholder = "placeholder" type = "text"/>
+  <label class="marks">
+    <span class="name">{{ name }}</span>
+    <input v-model.trim="input" :placeholder="placeholder" :type="type" />
   </label>
 </template>
 
-<script lang = "ts">
-  import Vue from 'vue';
-  import {Component, Prop, Watch} from 'vue-property-decorator';
+<script lang="ts">
+  import Vue from 'vue'
+  import { Component, Prop, Watch } from 'vue-property-decorator'
 
   @Component
   export default class Marks extends Vue {
-    @Prop(String) readonly value!: string;
-    @Prop({required: true}) name!: string;
-    @Prop({required: true}) readonly placeholder!: string;
+    @Prop(String) readonly value!: string
+    @Prop({ required: true }) name!: string
+    @Prop({ required: true }) type!: string
+    @Prop({ required: true }) readonly placeholder!: string
 
-    input = '';
+    input = ''
 
     created(): void {
-      this.input = this.value;
+      this.input = this.value
     }
 
     @Watch('input')
     onUpdateMarks(): void {
-      this.$emit('update:value', this.input);
+      this.$emit('update:value', this.input)
     }
 
     @Watch('value')
     onUpdateValue(): void {
-      this.input = this.value;
+      this.input = this.value
     }
   }
 </script>
 
-<style lang = "scss" scoped>
-  @import "~@/assets/styles/helper.scss";
+<style lang="scss" scoped>
+  @import '~@/assets/styles/helper.scss';
 
   .marks {
     padding-left: 16px;

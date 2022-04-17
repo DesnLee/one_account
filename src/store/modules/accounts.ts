@@ -3,42 +3,47 @@ import deepClone from '@/lib/deepClone';
 const localStorageName = 'savedAccount';
 
 const state = {
-  accountsData: [] as Account[]
+  accountsData: [] as Account[],
 };
 
 const mutations = {
   fetch(state: any) {
-    state.accountsData = JSON.parse(window.localStorage.getItem(localStorageName) || '[]');
-  }
+    state.accountsData = JSON.parse(
+      window.localStorage.getItem(localStorageName) || '[]'
+    );
+  },
 };
 
 const actions = {
-  async save({state}: any) {
-    return new Promise(resolve => {
+  async save({ state }: any) {
+    return new Promise((resolve) => {
       try {
-        window.localStorage.setItem(localStorageName, JSON.stringify(state.accountsData));
-        resolve({code: 1, message: '记录账单成功！'});
+        window.localStorage.setItem(
+          localStorageName,
+          JSON.stringify(state.accountsData)
+        );
+        resolve({ code: 1, message: '记录账单成功！' });
       } catch (err: any) {
-        resolve({code: 1000, message: err.message});
+        resolve({ code: 1000, message: err.message });
       }
     });
   },
-  async create({dispatch, state}: any, data: Account) {
+  async create({ dispatch, state }: any, data: Account) {
     const cloneData = deepClone(data);
-    cloneData.createAt = new Date().toISOString();
+    cloneData.createAt = cloneData.createAt || new Date().toISOString();
     state.accountsData.push(cloneData);
 
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       dispatch('save').then((result: object) => {
         resolve(result);
       });
     });
-  }
+  },
 };
 
 export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
 };

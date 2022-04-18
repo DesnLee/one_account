@@ -5,7 +5,6 @@
 <script lang="ts">
   import Vue from 'vue'
   import { Component, Prop, Watch } from 'vue-property-decorator'
-  // import VChart, { THEME_KEY } from 'vue-echarts'
   import * as echarts from 'echarts'
 
   type Final = {
@@ -49,7 +48,9 @@
 
       return {
         grid: {
-          right: 12,
+          top: '24%',
+          left: 40,
+          right: 16,
           bottom: 32,
         },
         title: {
@@ -60,8 +61,7 @@
         xAxis: {
           data: dataAxis,
           axisLabel: {
-            inside: true,
-            color: '#fff',
+            color: '#909399',
           },
           axisTick: {
             show: false,
@@ -84,6 +84,8 @@
         },
         tooltip: {
           show: true,
+          position: 'top',
+          formatter: `<div class="tooltip-content"><p class="date">{b}</p><span>合计：¥</span> <span class="total">{c}</span></div>`,
         },
         series: [
           {
@@ -116,5 +118,29 @@
   .chart {
     margin-top: 24px;
     height: 400px;
+
+    ::v-deep .tooltip-content {
+      font-size: 12px;
+      color: #303133;
+
+      .date {
+        color: #909399;
+        display: flex;
+        align-items: center;
+        &::before {
+          content: '';
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background-color: #188df0;
+          margin-right: 8px;
+        }
+      }
+
+      .total {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
   }
 </style>

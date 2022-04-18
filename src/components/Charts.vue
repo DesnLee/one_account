@@ -36,9 +36,9 @@
       let yMax = 0
 
       for (const item of this.finalList) {
-        dataAxis.unshift(item.title.substring(5))
-        data.unshift(item.total)
-        yMax = item.total < yMax ? yMax : item.total
+        if (dataAxis.length < 7) dataAxis.unshift(item.title.substring(5))
+        if (data.length < 7) data.unshift(item.total)
+        yMax = Math.max(yMax, item.total)
       }
 
       let dataShadow = []

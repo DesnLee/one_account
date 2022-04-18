@@ -3,6 +3,8 @@
 </template>
 
 <script lang="ts">
+  import dayjs from 'dayjs'
+  import _ from 'lodash'
   import Vue from 'vue'
   import { Component, Prop, Watch } from 'vue-property-decorator'
   import * as echarts from 'echarts'
@@ -31,15 +33,21 @@
     }
 
     get option() {
-      let dataAxis = []
-      let data = []
+      let xAxis: string[]
+      let data: number[]
       let yMax = 0
 
-      for (const item of this.finalList) {
-        if (dataAxis.length < 7) dataAxis.unshift(item.title.substring(5))
-        if (data.length < 7) data.unshift(item.total)
-        yMax = Math.max(yMax, item.total)
+      const today = new Date()
+      const foundData = []
+      for (let i = 0; i <= 6; i++) {
+        const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD')
+        const result = _.find(this.finalList, { title: dateString })
+        foundData.unshift({ dateString, result: result?.total || 0 })
+        yMax = Math.max(yMax, result?.total || 0)
       }
+
+      xAxis = foundData.map(({ dateString }) => dateString.substring(5))
+      data = foundData.map(({ result }) => result)
 
       let dataShadow = []
       for (let i = 0; i < data.length; i++) {
@@ -55,11 +63,10 @@
         },
         title: {
           text: `近 7 天${this.currentTab}统计`,
-          subtext:
-            '计入有数据的日期，未展示代表当日数据为 0，点击可查看具体数值',
+          subtext: '无柱形代表当日数据为 0，点击柱形可查看具体数值',
         },
         xAxis: {
-          data: dataAxis,
+          data: xAxis,
           axisLabel: {
             color: '#909399',
           },

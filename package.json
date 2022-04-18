@@ -24,6 +24,7 @@
   "devDependencies": {
     "@types/echarts": "^4.9.13",
     "@types/jest": "^24.0.25",
+    "@types/lodash": "^4.14.181",
     "@typescript-eslint/eslint-plugin": "^4.28.4",
     "@typescript-eslint/parser": "^4.28.4",
     "@vue/cli-plugin-babel": "^4.5.13",
@@ -38,6 +39,7 @@
     "@vue/test-utils": "^1.2.2",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
+    "lodash": "^4.17.21",
     "sass": "^1.36.0",
     "sass-loader": "^8.0.2",
     "svg-sprite-loader": "^6.0.11",
